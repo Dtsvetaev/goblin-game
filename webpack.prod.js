@@ -1,10 +1,27 @@
+const webpack = require("webpack");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = merge(common, {
-  mode: "production",
-  optimization: {
-    minimizer: [new CssMinimizerPlugin()],
+  
+  mode: "development",
+  
+  
+  devtool: "inline-source-map",
+
+ 
+  devServer: {
+    static: "./dist",              
+    historyApiFallback: true,     
+    open: true,                   
+    compress: true,               
+    hot: true,                   
+    port: 8080,                   
   },
+
+  plugins: [
+    
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 });
+
